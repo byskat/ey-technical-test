@@ -1,10 +1,10 @@
-const URI = "photos";
+const URI = 'photos';
+const FLAGS = ['inactive', 'loading', 'error'];
 
 export const state = () => ({
   items: [],
   itemStart: 0,
-  itemLimit: 10,
-  busy: false,
+  flag: FLAGS[0],
 })
 
 export const mutations = {
@@ -14,8 +14,18 @@ export const mutations = {
   updatePagination(state, batchSize) {
     state.itemStart = state.itemStart + batchSize;
   },
+  updateFlag(state, flag) {
+    try {
+      if (FLAGS.indexOf(flag) != -1) {
+        state.flag = flag;
+      } else {
+        throw `That state is unknown (${id})!`;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  },
   deleteImage(state, id) {
-    console.log(id);
     try {
       const imageId = state.items.findIndex(i => i.id == id);
 
@@ -31,12 +41,19 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchImages({ commit, state }) {
+  async fetchImages({ commit, state }, itemLimit = 50) {
+    commit("updateFlag", "loading");
+
     await this.$axios.$get(
-      `${URI}?_start=${state.itemStart}&_limit=${state.itemLimit}`
+      `${URI}?_start=${state.itemStart}&_limit=${itemLimit}`
     ).then(images => {
       commit("setImages", images);
       commit("updatePagination", images.length);
+    }).catch((e) => {
+      commit("updateFlag", "error");
+      console.error(e);
+    }).finally(() => {
+      commit("updateFlag", "inactive");
     });
   },
 }
@@ -44,5 +61,8 @@ export const actions = {
 export const getters = {
   getImages(state) {
     return state.items;
+  },
+  getFlag(state) {
+    return state.flag;
   },
 }
