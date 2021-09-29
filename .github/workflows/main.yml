@@ -31,7 +31,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - run: yarn ci
       - run: yarn test
       - run: yarn generate
 
