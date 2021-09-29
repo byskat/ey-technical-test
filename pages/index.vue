@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button v-on:click="$store.dispatch('images/fetchImages')">Load</button>
     <main class="c-grid">
       <ImageCard
         v-for="image in getImages"
@@ -8,6 +7,7 @@
         :content="image"
       />
     </main>
+    <Observer @intersect="intersected" />
   </div>
 </template>
 
@@ -18,10 +18,28 @@ export default {
   computed: {
     ...mapGetters({
       getImages: "images/getImages",
+      getFlag: "images/getFlag",
     }),
   },
-  mounted() {
-    this.$store.dispatch("images/fetchImages");
+  methods: {
+    intersected() {
+      this.$store.dispatch("images/fetchImages");
+    },
+  },
+  watch: {
+    getFlag: (flag) => {
+      switch (flag) {
+        case "loading":
+          $nuxt.$loading.start();
+          break;
+        case "inactive":
+          $nuxt.$loading.finish();
+          break;
+        case "error":
+          $nuxt.$loading.error();
+          break;
+      }
+    },
   },
 };
 </script>
@@ -32,6 +50,11 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1em;
 
-  margin: 0 5vw;
+  /*
+  This 2 rules combined with the IntersectionObserver makes the 
+  page load more smoothly.
+  */
+  min-height: 100vh;
+  margin: 5vw 5vw -100vh;
 }
 </style>
