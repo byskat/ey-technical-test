@@ -34,6 +34,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    'nuxt-lazysizes'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
