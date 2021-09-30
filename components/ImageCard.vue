@@ -1,8 +1,12 @@
 <template>
   <figure
-    :class="['c-imageCard', { 'c-imageCard--reveal': loaded }]"
-    v-on:click="deleteImage(content.id)"
-    v-on:keyup.delete="deleteImage(content.id)"
+    :class="[
+      'c-imageCard',
+      { 'c-imageCard--reveal': loaded },
+      { 'c-imageCard--destroy': destroy },
+    ]"
+    v-on:click="hideCard"
+    v-on:keyup.delete="hideCard"
     tabindex="0"
   >
     <ImageWrapper
@@ -34,6 +38,7 @@ export default {
   data() {
     return {
       loaded: false,
+      destroy: false,
     };
   },
   methods: {
@@ -43,21 +48,33 @@ export default {
     imgLoaded() {
       this.loaded = true;
     },
+    hideCard() {
+      this.destroy = true;
+      setTimeout(() => {
+        this.deleteImage(this.content.id);
+      }, 300);
+    },
   },
 };
 </script>
 
 <style lang="scss">
 .c-imageCard {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+
+  border: 1px solid rgba(black, 0.1);
+  border-radius: 6px;
+  outline-offset: -3px;
 
   transform: translate(-10px, -10px);
   opacity: 0;
-  transition: all 0.3s ease;
 
-  &--reveal {
-    transform: translate(0, 0);
-    opacity: 1;
+  &,
+  figcaption,
+  picture {
+    transition: all 0.3s ease;
   }
 
   &:hover {
@@ -65,7 +82,32 @@ export default {
   }
 
   &:focus {
-    outline: 1px solid red;
+    transform: translate(-5px, -5px);
+    outline: 5px solid rgba(black, 0.3);
+    outline-offset: 5px;
+
+    figcaption {
+      transform: scale(1.1) translateY(-0.5em);
+    }
+
+    picture {
+      transform: scale(1.1);
+    }
+  }
+
+  &--reveal {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  &--destroy {
+    opacity: 0;
+  }
+
+  figcaption {
+    background-color: white;
+    transition: all 0.3s ease;
+    padding: 1.5rem;
   }
 
   img {

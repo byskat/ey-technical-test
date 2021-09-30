@@ -34,7 +34,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    'nuxt-lazysizes'
+    'nuxt-lazysizes',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -47,6 +48,15 @@ export default {
   axios: {
     // This should be obscured if this was a private API (.env or similar)
     baseURL: 'https://jsonplaceholder.typicode.com'
+  },
+
+  // Google fonts configuration: https://google-fonts.nuxtjs.org/options
+  googleFonts: {
+    families: {
+      'Open+Sans': {
+        ital: [400]
+      },
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

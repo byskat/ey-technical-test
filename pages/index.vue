@@ -55,6 +55,6 @@ export default {
   page load more smoothly.
   */
   min-height: 100vh;
-  margin: 5vw 5vw -100vh;
+  margin: 5vw 5vw -95vh;
 }
 </style>
