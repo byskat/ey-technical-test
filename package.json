@@ -2,11 +2,15 @@
   "name": "ey-technical-test",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=15.7.0"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "from-scratch": "yarn install && nuxt generate && nuxt start",
     "test": "jest"
   },
   "dependencies": {
