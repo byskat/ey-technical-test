@@ -49,11 +49,21 @@ export default {
 
 <style lang="scss">
 .c-imageCard {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+
+  border: 1px solid rgba(black, 0.1);
+  outline-offset: -3px;
 
   transform: translate(-10px, -10px);
   opacity: 0;
-  transition: all 0.3s ease;
+
+  &,
+  figcaption,
+  picture {
+    transition: all 0.3s ease;
+  }
 
   &--reveal {
     transform: translate(0, 0);
@@ -65,7 +75,23 @@ export default {
   }
 
   &:focus {
-    outline: 1px solid red;
+    transform: translate(-5px, -5px);
+    outline: 5px solid rgba(black, 0.3);
+    outline-offset: 5px;
+
+    figcaption {
+      transform: scale(1.1) translateY(-0.5em);
+    }
+
+    picture {
+      transform: scale(1.1);
+    }
+  }
+
+  figcaption {
+    background-color: white;
+    transition: all 0.3s ease;
+    padding: 1.5rem;
   }
 
   img {
