@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: "ImageWrapper",
   props: {
     thumb: {
       type: String,
@@ -36,18 +37,19 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 picture {
   overflow: hidden;
-}
-.blur-up {
-  -webkit-filter: blur(2px);
-  filter: blur(2px);
-  transition: filter 400ms;
 
-  &.lazyloaded {
-    -webkit-filter: blur(0);
-    filter: blur(0);
+  .blur-up {
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+    transition: filter 400ms;
+
+    &.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+    }
   }
 }
 </style>

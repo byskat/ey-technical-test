@@ -21,10 +21,14 @@
 </template>
 
 <script>
+import ImageWrapper from "@/components/imageWrapper.vue";
 import { mapMutations } from "vuex";
 
 export default {
   name: "ImageCard",
+  components: {
+    ImageWrapper,
+  },
   props: {
     content: {
       type: Object,
