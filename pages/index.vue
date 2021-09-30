@@ -10,11 +10,11 @@
     <Observer @intersect="intersected" />
   </div>
 </template>
-
 <script>
 import { mapGetters } from "vuex";
 
 export default {
+  name: "Index",
   computed: {
     ...mapGetters({
       getImages: "images/getImages",
