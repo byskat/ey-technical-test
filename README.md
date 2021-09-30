@@ -7,9 +7,9 @@ https://ey-technical-test.byskat.me/
 ## Try it out: Single command
 
 ```bash
-will install the dependencies, generate the code (SSG) and serve
+# will install the dependencies, generate the code (SSG) and serve
 
-$ yarn fromScratch
+$ yarn from-scratch
 ```
 The project has been developed over Node 15.7
 
