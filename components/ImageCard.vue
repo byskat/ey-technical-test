@@ -83,11 +83,13 @@ export default {
 
   &:hover {
     cursor: pointer;
+    outline: 5px solid rgba(green, 0.5);
+    outline-offset: -1px;
   }
 
   &:focus {
-    transform: translate(-5px, -5px);
-    outline: 5px solid rgba(black, 0.3);
+    transform: translateY(-1em);
+    outline: 5px solid rgba(red, 0.5);
     outline-offset: 5px;
 
     figcaption {

@@ -48,7 +48,7 @@ export default {
 .c-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 1.5em;
+  grid-gap: 3em 1.5em;
 
   /*
   This 2 rules combined with the IntersectionObserver makes the 
